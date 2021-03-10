@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.naverapipractice">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NaverAPIPractice">
+        <activity android:name=".aaaaaaaaaaaaa"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,8 +20,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    /*서버 통신을 위해 인터넷을 사용하므로 추가*/
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
