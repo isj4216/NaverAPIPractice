@@ -57,19 +57,19 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        })
 
-        val api = NaverAPI.create()
-
-        api.getSearchMovies("테스트").enqueue(object : Callback<ResultGetSearchMovies> {
-            override fun onResponse(call: Call<ResultGetSearchMovies>, response: Response<ResultGetSearchMovies>) {
-                //성공
-                Log.d("결과GET1", "성공 : ${response.raw()}")
-            }
-
-            override fun onFailure(call: Call<ResultGetSearchMovies>, t: Throwable) {
-                //실패
-                Log.d("결과GET1", "실패 : ${t}")
-            }
-        })
+//        val api = NaverAPI.create()
+//
+//        api.getSearchMovies("테스트").enqueue(object : Callback<ResultGetSearchMovies> {
+//            override fun onResponse(call: Call<ResultGetSearchMovies>, response: Response<ResultGetSearchMovies>) {
+//                //성공
+//                Log.d("결과GET1", "성공 : ${response.raw()}")
+//            }
+//
+//            override fun onFailure(call: Call<ResultGetSearchMovies>, t: Throwable) {
+//                //실패
+//                Log.d("결과GET1", "실패 : ${t}")
+//            }
+//        })
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

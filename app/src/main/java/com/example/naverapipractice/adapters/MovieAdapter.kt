@@ -13,12 +13,12 @@ import com.example.naverapipractice.Items
 import com.example.naverapipractice.R
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(val context: Context, val movieList: List<Items>) :
+class MovieAdapter(val context: Context, val movieList: List<Items>?) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun getItemCount(): Int {
         //아이템개수 리턴
-        return movieList.size
+        return movieList!!.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -31,10 +31,12 @@ class MovieAdapter(val context: Context, val movieList: List<Items>) :
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         //틀과 넘어온 내용을 합쳐줌(View에 내용을 입력)
         //list = 1, 2, 3...
-        val movieList = movieList[position]
+        val movieList = movieList?.get(position)
 
 //        holder.movieImage.drawable
-        holder.movieTitle.text = movieList.title
+        if (movieList != null) {
+            holder.bindItems(movieList)
+        }
     }
 
     inner class MovieViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
@@ -46,22 +48,16 @@ class MovieAdapter(val context: Context, val movieList: List<Items>) :
             .apply(RequestOptions.centerCropTransform())
             .into(view.movieImage)
 
-            itemView.movieTitle.text = data.title
+            view.movieTitle.text = data.title
+            view.movieDirector.text = data.director
+            view.movieActor.text = data.actor
 
             //클릭시 웹사이트 연결
-            itemView.setOnClickListener {
+            view.setOnClickListener {
                 val wepPage = Uri.parse("${data.link}")
                 val webIntent = Intent(Intent.ACTION_VIEW, wepPage)
                 view.getContext().startActivity(webIntent)
             }
         }
-
-
-
-
-
-        val movieImage = view.movieImage
-        val movieTitle = view.movieTitle
-        val root = view.root
     }
 }

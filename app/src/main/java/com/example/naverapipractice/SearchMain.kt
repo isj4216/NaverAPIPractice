@@ -10,13 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.naverapipractice.adapters.MovieAdapter
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.search_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SarchMain: AppCompatActivity() {
+class SearchMain: AppCompatActivity() {
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,18 +53,28 @@ class SarchMain: AppCompatActivity() {
     fun fetchJson(vararg p0 : String){
         //vararg 가변인자 : 함수 호출 시, 인자 개수를 유동적으로 지정 가능
         val api = NaverAPI.create()
+        val query : String = searchEditText.text.toString()
 
-        api.getSearchMovies("어벤져스").enqueue(object : Callback<ResultGetSearchMovies> {
+        api.getSearchMovies(query, 10, 1).enqueue(object : Callback<ResultGetSearchMovies> {
             override fun onResponse(call: Call<ResultGetSearchMovies>, response: Response<ResultGetSearchMovies>) {
                 //성공
                 Log.d("결과GET", "성공 : ${response.raw()}")
 
-                val body = response.body()
 
-                //Gson을 Kotlin에서 사용 가능한 object로 만든다.
-                val gson = GsonBuilder().create()
-                val movieList = gson.fromJson(NaverAPI, Items::class.java)
-                println(movieList)
+
+                val body : List<Items>? = response?.body()?.items
+                println("Success to excute request : ${body}")
+//
+//                //Gson을 Kotlin에서 사용 가능한 object로 만든다.
+//                val gson = GsonBuilder().create()
+//                println("aa1" + gson)
+//                val listItems = gson.fromJson(body, Items::class.java)
+//                println("aa2" + listItems)
+
+                runOnUiThread {
+                    movieRecyclerView.adapter = MovieAdapter(this@SearchMain, body)
+                    searchEditText.setText("")
+                }
             }
 
             override fun onFailure(call: Call<ResultGetSearchMovies>, t: Throwable) {

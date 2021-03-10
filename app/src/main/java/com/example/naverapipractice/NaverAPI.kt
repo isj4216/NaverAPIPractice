@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface NaverAPI {
     //API 인터페이스 생성
     //GET방식으로 값을 받아오겠다는 것을 명시
-    @GET("v1/search/movies.json")
+    @GET("v1/search/movie.json")
     fun getSearchMovies(
 //        @Header("X-Naver-Client-Id") clientId: String,
 //        @Header("X-Naver-Client-Secret") clientSecret: String,
@@ -37,12 +37,14 @@ interface NaverAPI {
     //로그 기록에 사용할 HttpLoggingInterceptor와 고정 헤더값에 사용할 Interceptor를 만들어줍니다.
     //두개의 Interceptor를 클라이언트에 추가 후 다시 이 클라이언트를 Retrofit을 빌드할때 추가해줌.
     companion object {
+//        영화
         private const val CLIENT_ID = "IRMdb2gClbu3g3IpK6MO"
         private const val CLIENT_SECRET = "pjRTdg2vAh"
         private const val BASE_URL_NAVER_API = "https://openapi.naver.com/"
 
-        private const val CLIENT_ID2 = "4aXXJF00o4TelIN3xxoI"
-        private const val CLIENT_SECRET2 = "Ugd5IpZ_5w"
+//        파파고
+//        private const val CLIENT_ID2 = "4aXXJF00o4TelIN3xxoI"
+//        private const val CLIENT_SECRET2 = "Ugd5IpZ_5w"
 
         fun create(): NaverAPI {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
