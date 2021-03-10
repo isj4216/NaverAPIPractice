@@ -1,5 +1,7 @@
-package com.example.naverapipractice
+package com.example.naverapipractice.api
 
+import com.example.naverapipractice.ResultTransferPapago
+import com.example.naverapipractice.model.ResultGetSearchMovies
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

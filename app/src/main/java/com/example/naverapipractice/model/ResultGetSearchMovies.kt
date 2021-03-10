@@ -1,4 +1,6 @@
-package com.example.naverapipractice
+package com.example.naverapipractice.model
+
+import com.example.naverapipractice.Items
 
 //파싱할 값을 저장할 데이터 클래스
 data class ResultGetSearchMovies (

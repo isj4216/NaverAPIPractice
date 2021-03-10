@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.naverapipractice.adapters.MovieAdapter
+import com.example.naverapipractice.api.NaverAPI
+import com.example.naverapipractice.model.ResultGetSearchMovies
 import kotlinx.android.synthetic.main.search_main.*
 import retrofit2.Call
 import retrofit2.Callback
