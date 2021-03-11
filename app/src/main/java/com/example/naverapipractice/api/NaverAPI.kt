@@ -49,9 +49,11 @@ interface NaverAPI {
 //        private const val CLIENT_SECRET2 = "Ugd5IpZ_5w"
 
         fun create(): NaverAPI {
+            //로그기록 Interceptor
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
+            //고정 헤더값에 사용 할 Interceptor
             val headerInterceptor = Interceptor {
                 val request = it.request().newBuilder()
                             .addHeader("X-Naver-Client-Id", CLIENT_ID)

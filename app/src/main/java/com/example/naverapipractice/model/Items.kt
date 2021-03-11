@@ -10,5 +10,5 @@ data class Items(
     val pubDate : String,
     val director : String,
     val actor : String,
-    val usrRating : String
+    val usrRating : Float
 )

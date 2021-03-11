@@ -48,12 +48,17 @@ class MovieAdapter(val context: Context, val movieList: List<Items>?) :
             .apply(RequestOptions.centerCropTransform())
             .into(view.movieImage)
 
-            view.movieTitle.text = data.title
-            view.movieDirector.text = data.director
-            view.movieActor.text = data.actor
+            val text = "제목 : " + data.title
+            val director = "감독 : " + data.director
+            val actor = "배우 : " + data.actor
+            view.movieTitle.text = text
+            view.movieDirector.text = director
+            view.movieActor.text = actor
 
-            //클릭시 웹사이트 연결
-            view.setOnClickListener {
+//            println("asdf $data")
+
+            //이미지 클릭시 웹사이트 연결
+            view.movieImage.setOnClickListener {
                 val wepPage = Uri.parse("${data.link}")
                 val webIntent = Intent(Intent.ACTION_VIEW, wepPage)
                 view.getContext().startActivity(webIntent)

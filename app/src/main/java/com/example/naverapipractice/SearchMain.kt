@@ -37,6 +37,7 @@ class SearchMain: AppCompatActivity() {
                     //널이 아닌 경우
                     //레이아웃 매니저 설정
                     movieRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+                    //항목의 높이나 너비가 변경되지 안으며, 추가 또는 제거된 모든 항목은 동일하다.
                     movieRecyclerView.setHasFixedSize(true)
 
                     //API
@@ -57,12 +58,13 @@ class SearchMain: AppCompatActivity() {
         val api = NaverAPI.create()
         val query : String = searchEditText.text.toString()
 
+        //                              1~10개 까지만
+        //enqueue를 통해서 onResponse와 onFailure를 사용
         api.getSearchMovies(query, 10, 1).enqueue(object : Callback<ResultGetSearchMovies> {
             override fun onResponse(call: Call<ResultGetSearchMovies>, response: Response<ResultGetSearchMovies>) {
                 //성공
+                //onResponse의 경우 서버에서 정의하는 success가 아닌 경우에 대한 예외 처리를 포함 한 코드를 작성해야한다.
                 Log.d("결과GET", "성공 : ${response.raw()}")
-
-
 
                 val body : List<Items>? = response?.body()?.items
                 println("Success to excute request : ${body}")
@@ -73,6 +75,8 @@ class SearchMain: AppCompatActivity() {
 //                val listItems = gson.fromJson(body, Items::class.java)
 //                println("aa2" + listItems)
 
+                //현재 스레드가 UI스레드라면 UI자원을 사용하는 행동에 대해서는 즉시 실행.
+                //현재 스레드가 UI스레드가 아니라면 행동은 UI스레드의 자원 사용 이벤트 큐에 들어간다.
                 runOnUiThread {
                     movieRecyclerView.adapter = MovieAdapter(this@SearchMain, body)
                     searchEditText.setText("")
